@@ -1,58 +1,19 @@
 # Privacy Policy for YouTube Account Switcher
 
-**Last updated:** January 14, 2026
+Last updated: October 15, 2026
 
-## Overview
+The extension does not collect or transmit personal information, browsing history, usage statistics or analytics. It has no backend and loads no remote code.
 
-YouTube Account Switcher is a browser extension that automatically switches to your secondary Google account when browsing YouTube. This privacy policy explains how we handle your data.
+It modifies the `authuser` query parameter on supported YouTube page and embed requests using Chrome's declarative network rules. It stores only the enabled state and selected numeric account index in `chrome.storage.local`. These preferences remain in the local Chrome profile; they are not synced by this extension.
 
-## Data Collection
+On YouTube's error page, a local helper offers to open Google's account chooser. The popup can also open the chooser or reopen a YouTube URL. These actions navigate to Google or YouTube normally; those services handle their own sign-in and data under their respective privacy policies. The extension cannot read passwords, authentication tokens, cookies, or the list of Google accounts and does not store email addresses.
 
-**We do not collect any data.**
+Permissions:
 
-This extension:
-- Does not collect personal information
-- Does not collect browsing history
-- Does not collect usage statistics
-- Does not use analytics or tracking
-- Does not transmit any data to external servers
+- `declarativeNetRequest`: route supported YouTube document requests to the selected account index.
+- YouTube host access: apply redirects, read the active YouTube URL when requested from the popup, and display the local helper on `/oops`.
+- `storage`: save two local preferences.
 
-## How the Extension Works
+Disabling automatic routing removes its dynamic routing rules. Uninstalling removes its local settings and rules. No information is sent to the developer or other external servers by the extension.
 
-The extension operates entirely locally on your browser. It:
-1. Detects when you navigate to YouTube
-2. Modifies the URL to include `authuser=1` parameter
-3. This tells YouTube to use your secondary logged-in Google account
-
-No data leaves your browser. The extension simply modifies URLs locally.
-
-## Permissions Used
-
-The extension requires certain browser permissions to function:
-
-- **webNavigation**: To detect when you navigate to YouTube pages
-- **tabs**: To update the current tab's URL with the account switching parameter
-- **declarativeNetRequest**: To handle YouTube embedded videos on other websites
-- **host_permissions (youtube.com)**: To operate on YouTube pages
-
-These permissions are used solely for the core functionality described above.
-
-## Third-Party Services
-
-This extension does not use any third-party services, APIs, or analytics platforms.
-
-## Data Storage
-
-This extension does not store any data locally or remotely.
-
-## Changes to This Policy
-
-If we make changes to this privacy policy, we will update the "Last updated" date above.
-
-## Contact
-
-If you have questions about this privacy policy, please open an issue on our GitHub repository.
-
-## Open Source
-
-This extension is open source. You can review the complete source code to verify these privacy practices.
+Questions and source code: https://github.com/QuentinFuxa/youtube-account-switcher

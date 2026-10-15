@@ -1,0 +1,13 @@
+import { mkdir, rm, cp, readFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+const root = new URL('../', import.meta.url);
+const out = new URL('dist/', root);
+const folder = new URL('extension/', out);
+const files = ['manifest.json', 'background.js', 'routing.js', 'popup.html', 'popup.css', 'popup.js', 'recovery.js', 'icons', 'privacy-policy.md'];
+await rm(out, { recursive: true, force: true });
+await mkdir(folder, { recursive: true });
+for (const file of files) await cp(new URL(file, root), new URL(file, folder), { recursive: true });
+const manifest = JSON.parse(await readFile(new URL('manifest.json', folder)));
+const zip = new URL(`youtube-account-switcher-${manifest.version}.zip`, out);
+execFileSync('/usr/bin/zip', ['-q', '-r', zip.pathname, ...files], { cwd: folder });
+console.log(`Unpacked: ${folder.pathname}\nZIP: ${zip.pathname}`);
