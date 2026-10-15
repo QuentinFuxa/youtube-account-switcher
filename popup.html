@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="fr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YouTube Account Switcher</title>
+<link rel="stylesheet" href="popup.css">
+<main>
+  <h1>YouTube Account Switcher</h1>
+  <form id="settings">
+    <label class="toggle"><input id="enabled" type="checkbox"> Bascule automatique</label>
+    <label for="accountIndex">Numéro du compte Google</label>
+    <input id="accountIndex" type="number" min="0" max="99" required value="1">
+    <p>0 = compte principal, 1 = deuxième compte connecté. Cet ordre peut changer après une déconnexion.</p>
+    <button type="submit">Enregistrer</button>
+  </form>
+  <button id="open" type="button">Ouvrir YouTube avec ce compte</button>
+  <button id="choose" class="secondary" type="button">Choisir ou reconnecter un compte</button>
+  <p>Si YouTube affiche une erreur, vérifie que le compte secondaire est toujours connecté à Google.</p>
+  <p id="status" role="status" aria-live="polite"></p>
+</main>
+<script type="module" src="popup.js"></script>
+</html>
